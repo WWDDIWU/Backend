@@ -2,13 +2,16 @@
 
 const path = require('path');
 
+const mongoose = require('mongoose');
 const express = require('express');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
-const api = require('./public/routes/api');
+const api = require('./routes/api');
+
+mongoose.connect('mongodb://169.53.137.142/wwddiwu');
 
 const app = express();
 

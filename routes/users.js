@@ -4,14 +4,12 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
-const userModel = require('../models/users');
-const utils = require('../utils');
+const userModel = require('../models/user');
+const utils = require('../lib/utils');
 
 const config = require('../config');
 
 const users = express.Router();
-
-mongoose.connect('mongodb://169.53.137.142/wwddiwu');
 
 users.use(utils.jwtAuth);
 

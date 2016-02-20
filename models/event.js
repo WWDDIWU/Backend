@@ -2,10 +2,6 @@
 
 const mongoose = require('mongoose');
 const types = require('./types');
-const Time = types.Time;
-const UserID = types.UserID;
-const DayID = types.DayID;
-const LocationID = types.LocationID;
 
 const EventSchema = mongoose.Schema({
     type: {
@@ -27,12 +23,12 @@ const EventSchema = mongoose.Schema({
        }
    },
    title: String,
-   time: Time,
+   time: mongoose.Schema.Types.Time,
    description: String,
-   location: LocationID,
+   location: mongoose.Schema.Types.LocationID,
    suggestion: Boolean,
-   owner: UserID,
-   day: DayID
+   owner: mongoose.Schema.Types.UserID,
+   day: mongoose.Schema.Types.DayID
 });
 
 const Event = mongoose.model('Event', EventSchema);

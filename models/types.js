@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 const mongoose = require("mongoose");
 
 function validateMongoDbID(id) {

@@ -15,8 +15,6 @@ const config = require('../config');
 
 const api = express.Router();
 
-mongoose.connect('mongodb://169.53.137.142/wwddiwu');
-
 api.use('users', userRoute);
 api.use('devices', devicesRoute);
 api.use('events', eventsRoute);

@@ -8,8 +8,6 @@ const eventModel = require('../models/event');
 
 const events = express.Router();
 
-mongoose.connect('mongodb://169.53.137.142/wwddiwu');
-
 events.get('/:event_id', function(req, res) {
     eventModel.findOne({
         _id: req.params.event_id
@@ -57,3 +55,5 @@ events.get('/', function(req, res) {
 		res.json({events: events});
 	});
 });
+
+module.exports = events;

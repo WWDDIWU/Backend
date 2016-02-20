@@ -7,8 +7,6 @@ const userModel = require('../models/user');
 
 const devices = express.Router();
 
-mongoose.connect('mongodb://169.53.137.142/wwddiwu');
-
 devices.get('/:device_id', function(req, res) {
     userModel.findOne({
         username: req.jwt.username
@@ -68,3 +66,5 @@ devices.get('/', function(req, res) {
         });
     });
 });
+
+module.exports = devices;

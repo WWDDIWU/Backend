@@ -7,7 +7,7 @@ const DayID = types.DayID;
 const Checksum = types.Checksum;
 
 const Device = mongoose.Schema({
-   lastUpdate: Checksum,
+   lastUpdate: mongoose.Schema.Types.Checksum,
    type: {
        type: Number,
        validate: {
@@ -28,11 +28,11 @@ const UserSchema = mongoose.Schema({
     email: String,
     devices: [Device],
     relevantPlaces: {
-        home: LocationID,
-        work: LocationID,
-        other: [LocationID]
+        home: mongoose.Schema.Types.LocationID,
+        work: mongoose.Schema.Types.LocationID,
+        other: [mongoose.Schema.Types.LocationID]
     },
-    timeline: [DayID]
+    timeline: [mongoose.Schema.Types.DayID]
 });
 
 const User = mongoose.model('User', UserSchema);
