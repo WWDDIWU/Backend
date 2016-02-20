@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 const mongoose = require('mongoose');
 const types = require('./types');
 const LocationID = types.LocationID;
@@ -6,7 +7,7 @@ const DayID = types.DayID;
 const Checksum = types.Checksum;
 
 const Device = mongoose.Schema({
-   lastUpdate: Checksum,
+   lastUpdate: mongoose.Schema.Types.Checksum,
    type: {
        type: Number,
        validate: {
@@ -19,19 +20,18 @@ const Device = mongoose.Schema({
 });
 
 const UserSchema = mongoose.Schema({
-    userId: Number,
-    name: String,
-    lastName: String,
+    username: String,
+	firstname: String,
+	lastName: String,
     hash: String,
     salt: String,
     email: String,
     devices: [Device],
     relevantPlaces: {
-        home: LocationID,
-        work: LocationID,
-        other: [LocationID]
+        home: mongoose.Schema.Types.LocationID,
+        work: mongoose.Schema.Types.LocationID,
+        other: [mongoose.Schema.Types.LocationID]
     },
-    timeline: [DayID],
     unit: {
         type: Number,
         validate: {
@@ -41,8 +41,9 @@ const UserSchema = mongoose.Schema({
             message: '{VALUE} is not a valid unit type!'
         }
     }
+    timeline: [mongoose.Schema.Types.DayID]
 });
 
 const User = mongoose.model('User', UserSchema);
 
-exports.User = User;
+exports = User;

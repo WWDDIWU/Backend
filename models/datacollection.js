@@ -1,14 +1,12 @@
-"use strict";
+'use strict';
+
 const mongoose = require('mongoose');
 const types = require('./types');
-const UserID = types.UserID;
-const EventGroupID = types.EventGroupID;
-const EventID = types.EventID;
 
 const DataCollectionSchema = mongoose.Schema({
-    owner: UserID,
-    similarEvents: [EventGroupID],
-    suggestions: [EventID]
+    owner: mongoose.Schema.Types.UserID,
+    similarEvents: [mongoose.Schema.Types.EventGroupID],
+    suggestions: [mongoose.Schema.Types.EventID]
 });
 
 const DataCollection = mongoose.model('DataCollection', DataCollectionSchema);

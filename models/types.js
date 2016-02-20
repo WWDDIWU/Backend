@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 const mongoose = require("mongoose");
 
 function validateMongoDbID(id) {
@@ -81,10 +82,15 @@ Time.prototype.cast = function(val) {
     const start = val.start !== 'undefined';
     const end = val.end !== 'undefined';
     const timeIsValid = function () {
-        if(dur && !start && !end) return true;
-        if(!dur && start && end) return true;
-        if(!dur && start && !end) return true;
-        if(dur && start && !end) return true;
+        if(dur && !start && !end) {
+            return true;
+		}
+        if(!dur && start && end) {
+			return true;
+		}
+        if(!dur && start && !end){
+			return true;
+		}
         return false;
     };
     if (!timeIsValid()) {
@@ -119,4 +125,4 @@ exports = {
     DayID: DayID,
     Time: Time,
     Checksum: Checksum
-}
+};

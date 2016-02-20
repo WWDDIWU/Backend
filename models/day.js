@@ -1,9 +1,7 @@
-"use strict";
+'use strict';
+
 const mongoose = require('mongoose');
 const types = require('./types');
-const UserID = types.UserID;
-const Checksum = types.Checksum;
-const EventID = types.EventID;
 
 const SequenceElementSchema = mongoose.Schema({
     type: {
@@ -19,10 +17,10 @@ const SequenceElementSchema = mongoose.Schema({
 });
 
 const DaySchema = mongoose.Schema({
-    owner: UserID,
+    owner: mongoose.Schema.Types.UserID,
     date: Date,
-    checksum: Checksum,
-    events: [EventID],
+    checksum: mongoose.Schema.Types.Checksum,
+    events: [mongoose.Schema.Types.EventID],
     timeToGetFromAtoB: [Number],
     sequence: [SequenceElementSchema]
 });

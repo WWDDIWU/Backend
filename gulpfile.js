@@ -1,9 +1,11 @@
+'use strict';
+
 const gulp = require('gulp');
 const notify = require('gulp-notify');
 const growl = require('gulp-notify-growl');
 const jscs = require('gulp-jscs');
 const jshint = require('gulp-jshint');
-const changed = require('gulp-changed')
+const changed = require('gulp-changed');
 
 gulp.task('jshint', function () {
     const lib = gulp.src('lib/**/*.js').pipe(changed('lib/*.js')).pipe(jshint()).pipe(jshint.reporter('jshint-stylish'));

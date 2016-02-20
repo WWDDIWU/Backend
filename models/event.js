@@ -1,8 +1,7 @@
-"use strict";
+'use strict';
+
 const mongoose = require('mongoose');
 const types = require('./types');
-const Time = types.Time;
-const LocationID = types.LocationID;
 
 const EventSchema = mongoose.Schema({
     eventID: Number,
@@ -25,11 +24,12 @@ const EventSchema = mongoose.Schema({
        }
    },
    title: String,
-   time: Time,
+   time: mongoose.Schema.Types.Time,
    description: String,
-   location: LocationID,
-   suggestion: Boolean
-   
+   location: mongoose.Schema.Types.LocationID,
+   suggestion: Boolean,
+   owner: mongoose.Schema.Types.UserID,
+   day: mongoose.Schema.Types.DayID
 });
 
 const Event = mongoose.model('Event', EventSchema);
