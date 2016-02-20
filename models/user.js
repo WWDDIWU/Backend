@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 const mongoose = require('mongoose');
 const types = require('./types');
 const LocationID = types.LocationID;
@@ -19,7 +20,9 @@ const Device = mongoose.Schema({
 });
 
 const UserSchema = mongoose.Schema({
-    name: String,
+    username: String,
+	firstname: String,
+	lastName: String,
     hash: String,
     salt: String,
     email: String,
@@ -34,4 +37,4 @@ const UserSchema = mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-exports.User = User;
+exports = User;

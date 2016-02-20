@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 const mongoose = require('mongoose');
 const types = require('./types');
 const UserID = types.UserID;
