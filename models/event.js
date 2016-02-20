@@ -5,6 +5,7 @@ const Time = types.Time;
 const LocationID = types.LocationID;
 
 const EventSchema = mongoose.Schema({
+    eventID: Number,
     type: {
        type: Number,
        validate: {

@@ -19,7 +19,9 @@ const Device = mongoose.Schema({
 });
 
 const UserSchema = mongoose.Schema({
+    userId: Number,
     name: String,
+    lastName: String,
     hash: String,
     salt: String,
     email: String,
@@ -29,7 +31,16 @@ const UserSchema = mongoose.Schema({
         work: LocationID,
         other: [LocationID]
     },
-    timeline: [DayID]
+    timeline: [DayID],
+    unit: {
+        type: Number,
+        validate: {
+            validator: function (v) {
+                return (v < 2 && v >= 0);
+            },
+            message: '{VALUE} is not a valid unit type!'
+        }
+    }
 });
 
 const User = mongoose.model('User', UserSchema);

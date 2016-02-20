@@ -84,6 +84,7 @@ Time.prototype.cast = function(val) {
         if(dur && !start && !end) return true;
         if(!dur && start && end) return true;
         if(!dur && start && !end) return true;
+        if(dur && start && !end) return true;
         return false;
     };
     if (!timeIsValid()) {
@@ -112,10 +113,10 @@ Checksum.prototype.cast = function(val) {
 mongoose.Schema.Types.Checksum = Checksum;
 
 exports = {
-    LocationID,
-    EventID,
-    UserID,
-    DayID,
-    Time,
-    Checksum
+    LocationID: LocationID,
+    EventID: LocationID,
+    UserID: LocationID,
+    DayID: DayID,
+    Time: Time,
+    Checksum: Checksum
 }
