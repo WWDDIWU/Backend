@@ -11,4 +11,4 @@ const DataCollectionSchema = mongoose.Schema({
 
 const DataCollection = mongoose.model('DataCollection', DataCollectionSchema);
 
-exports.DataCollection = DataCollection;
+module.exports = DataCollection;
