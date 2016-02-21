@@ -2,6 +2,8 @@
 
 const mongoose = require("mongoose");
 
+const utils = require('../lib/utils');
+
 function validateMongoDbID(id) {
     return true;
 }
@@ -69,6 +71,7 @@ SequenceElementID.prototype.cast = function(val) {
 };
 
 mongoose.Schema.Types.SequenceElementID = SequenceElementID;
+
 
 //TtgfatbID definition
 function TtgfatbID(key, options) {
@@ -142,7 +145,7 @@ function Checksum(key, options) {
 Checksum.prototype = Object.create(mongoose.SchemaType.prototype);
 
 Checksum.prototype.cast = function(val) {
-    const checksumIsValid = true;
+    const checksumIsValid = utils.validateChecksum(val);
     if (!checksumIsValid) {
         throw new mongoose.SchemaType.CastError('Checksum ', val + ' is not valid');
     }

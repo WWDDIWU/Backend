@@ -21,7 +21,7 @@ events.get('/:event_id', function(req, res) {
 });
 
 events.get('/', function(req, res) {
-	eventManager.getEvents(req.jwt.username, function(err, events) {
+	eventManager.getEvents(req.query, req.jwt.username, function(err, events) {
 		if (err) {
 			res.sendStatus(500);
 		} else {
@@ -31,6 +31,7 @@ events.get('/', function(req, res) {
 });
 
 events.post('/', function(req, res) {
+	console.log(req.body);
 	eventManager.newEvent(req.body.event, req.jwt.username, function(err, event) {
 		if (err) {
 			res.sendStatus(500);

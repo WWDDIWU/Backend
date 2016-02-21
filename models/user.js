@@ -20,9 +20,9 @@ const Device = mongoose.Schema({
 });
 
 const UserSchema = mongoose.Schema({
-    username: String,
+	_id: String,
 	firstname: String,
-	lastName: String,
+	lastname: String,
     password: String,
     salt: String,
     email: String,

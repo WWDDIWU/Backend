@@ -5,74 +5,38 @@ const mongoose = require('mongoose');
 
 const TtgfatbModel = require('../models/ttgfatb');
 
+const ttgfatbManager = require('../lib/Database/ttgfatb');
+
 const ttgfatbs = express.Router();
 
 ttgfatbs.get('/', function(req, res) {
-	TtgfatbModel.find({
-		owner: req.jwt.username
-	}, function(err, TtgfatbObjects) {
+	ttgfatbManager.getTtgfatbs(req.jwt.username, function(err, ttgfatbs) {
 		if (err) {
-			return res.sendStatus(500);
+			res.sendStatus(500);
+		} else {
+			res.status(200).json(ttgfatbs);
 		}
-		let responseObjects = [];
-
-		TtgfatbObjects.forEach(function(e) {
-			const responseObj = {
-				id: e._id,
-				time: e.time,
-				day: e.dayID
-			};
-			responseObjects.push(responseObj);
-		});
-
-		res.status(200).json({ttgfatbs: responseObjects});
 	});
 });
 
 ttgfatbs.get('/:ttgfatb_id', function(req, res) {
-	TtgfatbModel.findOne({
-		_id: req.params.ttgfatb_id,
-		owner: req.jwt.username
-	}, function(err, ttgfatbObj) {
+	ttgfatbManager.getTtgfatb(req.params.ttgfatb_id, req.jwt.username, function(err, ttgfatb) {
 		if (err) {
-			return res.sendStatus(500);
+			res.sendStatus(500);
+		} else {
+			res.status(200).json(ttgfatb);
 		}
-		const responseObj = {
-			id: ttgfatbObj._id,
-			time: ttgfatbObj.time,
-			day: ttgfatbObj.dayID
-		};
-		res.status(200).json({'ttgfatb': responseObj});
 	});
 });
 
 ttgfatbs.put('/:ttgfatb_id', function(req, res) {
-	const ttgfatb = {
-		id: req.params.ttgfatb_id,
-		time: req.body.ttgfatb.time,
-		day: req.body.ttgfatb.dayID
-	};
-
-    TtgfatbModel.update({
-        _id: req.params.ttgfatb_id,
-        owner: req.jwt.username
-    }, {
-        $set: ttgfatb
-    }, function(err, ttgfatbObj) {
-        if (err) {
-            return res.sendStatus(500);
-        } else {
-
-            const responseObj = {
-				id: ttgfatbObj._id,
-				time: ttgfatbObj.time,
-				day: ttgfatbObj.dayID
-            };
-            res.status(200).json({
-                ttgfatb: responseObj
-            });
-        }
-    });
+	ttgfatbManager.updateTtgfatbs(req.body.ttgfatb, req.jwt.username, function(err, ttgfatb) {
+		if (err) {
+			res.sendStatus(500);
+		} else {
+			res.status(200).json(ttgfatb);
+		}
+	});
 });
 
 module.exports = ttgfatbs;

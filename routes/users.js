@@ -7,11 +7,11 @@ const mongoose = require('mongoose');
 const userModel = require('../models/user');
 const utils = require('../lib/utils');
 
+const userManager = require('../lib/Database/user');
+
 const config = require('../config');
 
 const users = express.Router();
-
-users.use(utils.jwtAuth);
 
 users.get('/', function(req, res) {
     res.status(200).send('true');
@@ -19,13 +19,13 @@ users.get('/', function(req, res) {
 
 users.get('/:username', function(req, res) {
     if (req.params.username === req.jwt.username) {
-        userModel.findOne({
-            username: req.params.username
-        }, function(err, user) {
-            res.json({
-                user: user
-            });
-        });
+        userManager.getUser(req.params.username, function(err, user) {
+			if (err) {
+				res.sendStatus(500);
+			} else {
+				res.status(200).json(user);
+			}
+		});
     } else {
         res.sendStatus(401);
     }

@@ -29,8 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-	res.setHeader('Access-Control-Allow-Methods', 'PUT, PATCH, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+	res.setHeader('Access-Control-Allow-Methods', 'PUT, PATCH, DELETE, OPTIONS');
 	next();
 });
 
