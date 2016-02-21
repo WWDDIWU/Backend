@@ -30,13 +30,17 @@ locations.get('/:location_id', function(req, res) {
 });
 
 locations.post('/', function(req, res) {
-	locationManager.newLocation(req.location, req.jwt.username, function(err, location) {
-		if (err) {
-			res.sendStatus(500);
-		} else {
-			res.status(200).json(location);
-		}
-	});
+	if (req.body.location.latitude !== null && req.body.location.longitude !== null) {
+		locationManager.newLocation(req.body.location, req.jwt.username, function(err, location) {
+			if (err) {
+				res.sendStatus(500);
+			} else {
+				res.status(200).json(location);
+			}
+		});
+	} else {
+		res.sendStatus(400);
+	}
 });
 
 locations.delete('/:location_id', function(req, res) {
