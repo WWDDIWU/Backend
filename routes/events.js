@@ -63,6 +63,8 @@ events.get('/', function(req, res) {
 
 events.post('/', function(req, res) {
 
+	console.log(req.body);
+
     const time = {
         start: req.body.event.start,
         end: req.body.event.end,
@@ -77,29 +79,43 @@ events.post('/', function(req, res) {
         suggestion: req.body.event.suggestion,
         location: req.body.event.location,
         day: req.body.event.day,
-        type: req.body.event.day,
+        type: req.body.type,
         owner: req.jwt ? req.jwt.username : null
     });
 
-    event.save(function(err) {
+    event.save(function(err, eventObj) {
         if (err) {
             return res.sendStatus(500);
         }
+		const obj = {
+			priority: eventObj.priority,
+	        title: eventObj.title,
+	        description: eventObj.description,
+	        suggestion: eventObj.suggestion,
+	        location: eventObj.location,
+	        day: eventObj.day,
+	        type: eventObj.type,
+			start: eventObj.time.start,
+	        end: eventObj.time.end,
+	        duration: eventObj.time.duration,
+			id: eventObj._id
+		};
+        res.status(200).json({
+            event: obj
+        });
     });
-
-    res.sendStatus(200);
 });
 
 events.delete('/:event_id', function(req, res) {
-
-	EventModel.find({
-		_id: req.params.event_id
-	}).remove(function(err) {
-		if (err) {
-			return res.sendStatus(500);
-		}
-		res.sendStatus(200);
-	});
+    EventModel.find({
+        _id: req.params.event_id,
+		owner: req.jwt.username
+    }).remove(function(err) {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        res.sendStatus(200);
+    });
 });
 
 events.put('/:event_id', function(req, res) {
@@ -118,17 +134,35 @@ events.put('/:event_id', function(req, res) {
         suggestion: req.body.event.suggestion,
         location: req.body.event.location,
         day: req.body.event.day,
-        type: req.body.event.day,
+        type: req.body.type,
         owner: req.jwt ? req.jwt.username : null
     };
 
     EventModel.update({
         _id: req.params.event_id
-    }, { $set: event }, function(err) {
+    }, {
+        $set: event
+    }, function(err, eventObj) {
         if (err) {
             return res.sendStatus(401);
         } else {
-            return res.sendStatus(200);
+			const obj = {
+				priority: eventObj.priority,
+		        title: eventObj.title,
+		        description: eventObj.description,
+		        suggestion: eventObj.suggestion,
+		        location: eventObj.location,
+		        day: eventObj.day,
+		        type: eventObj.type,
+				start: eventObj.time.start,
+		        end: eventObj.time.end,
+		        duration: eventObj.time.duration,
+				id: eventObj._id
+			};
+
+            return res.status(200).json({
+                event: eventObj
+            });
         }
     });
 });

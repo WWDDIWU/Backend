@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const types = require('./types');
 
 const SequenceElementSchema = mongoose.Schema({
+	owner: mongoose.Schema.Types.UserID,
+	day: mongoose.Schema.Types.DayID,
     type: {
         type: Number,
         validate: {
@@ -16,15 +18,6 @@ const SequenceElementSchema = mongoose.Schema({
     referenceID: Number //TO DO: needs to be validated
 });
 
-const DaySchema = mongoose.Schema({
-    owner: mongoose.Schema.Types.UserID,
-    date: Date,
-    checksum: mongoose.Schema.Types.Checksum,
-    events: [mongoose.Schema.Types.EventID],
-    timeToGetFromAtoB: [mongoose.Schema.Types.TtgfatbID],
-    sequence: [mongoose.Schema.Types.SequenceElementSchemaID]
-});
+const SequenceElement = mongoose.model('SequenceElement', SequenceElementSchema);
 
-const Day = mongoose.model('Day', DaySchema);
-
-module.exports = Day;
+module.exports = SequenceElement;

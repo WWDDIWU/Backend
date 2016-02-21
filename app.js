@@ -37,11 +37,6 @@ app.use(function(req, res, next) {
 
 app.use('/api', api);
 
-/*
-app.options('*', function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*').header('Access-Control-Allow-Headers', 'Content-Type').header('Access-Control-Allow-Methods', 'PUT, PATCH, DELETE, OPTIONS').sendStatus(200);
-});
-*/
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error('Not Found');

@@ -54,6 +54,38 @@ UserID.prototype.cast = function(val) {
 
 mongoose.Schema.Types.UserID = UserID;
 
+//SequenceElementID definition
+function SequenceElementID(key, options) {
+    mongoose.SchemaType.call(this, key, options, 'SequenceElementID');
+}
+
+SequenceElementID.prototype = Object.create(mongoose.SchemaType.prototype);
+
+SequenceElementID.prototype.cast = function(val) {
+    if (!validateMongoDbID(val)) {
+        throw new mongoose.SchemaType.CastError('SequenceElementID ', val + ' is not valid');
+    }
+    return val;
+};
+
+mongoose.Schema.Types.SequenceElementID = SequenceElementID;
+
+//TtgfatbID definition
+function TtgfatbID(key, options) {
+    mongoose.SchemaType.call(this, key, options, 'TtgfatbID');
+}
+
+TtgfatbID.prototype = Object.create(mongoose.SchemaType.prototype);
+
+TtgfatbID.prototype.cast = function(val) {
+    if (!validateMongoDbID(val)) {
+        throw new mongoose.SchemaType.CastError('TtgfatbID ', val + ' is not valid');
+    }
+    return val;
+};
+
+mongoose.Schema.Types.TtgfatbID = TtgfatbID;
+
 //DayID definition
 function DayID(key, options) {
     mongoose.SchemaType.call(this, key, options, 'DayID');

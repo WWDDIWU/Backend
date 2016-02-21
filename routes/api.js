@@ -25,28 +25,32 @@ api.get('/', function(req, res) {
     });
 });
 
-api.post('authenticate', function(req, res) {
+api.post('/authenticate', function(req, res) {
     if (req.body.username && req.body.password) {
         userModel.findOne({
             username: req.body.username
-        }, 'username email salt password', function(err, usr) {
-            if (utils.hashPassword(req.body.password, usr.salt) === usr.password) {
+        }, function(err, usr) {
+			if (usr) {
+                if (utils.hashPassword(req.body.password, usr.salt) === usr.password) {
 
-                const user = {
-                    username: usr.name,
-                    email: req.body.email
-                };
+                    const user = {
+                        username: usr.name,
+                        email: req.body.email
+                    };
 
-                const token = jwt.sign(user, config.jwtSecret, {
-                    expiresInMinutes: 30 * 24 * 60 // expires in 30 days
-                });
+                    const token = jwt.sign(user, config.jwtSecret, {
+                        expiresIn: 30 * 24 * 60 * 60 // expires in 30 days
+                    });
 
-                res.json({
-                    token: token
-                });
+                    res.json({
+                        token: token
+                    });
+                } else {
+                    res.sendStatus(401);
+                }
             } else {
-                res.sendStatus(401);
-            }
+				res.sendStatus(401);
+			}
         });
     } else {
         res.sendStatus(400);

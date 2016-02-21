@@ -23,7 +23,7 @@ const UserSchema = mongoose.Schema({
     username: String,
 	firstname: String,
 	lastName: String,
-    hash: String,
+    password: String,
     salt: String,
     email: String,
     devices: [Device],

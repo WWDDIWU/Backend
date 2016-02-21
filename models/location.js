@@ -23,7 +23,9 @@ const LocationSchema = mongoose.Schema({
             validator: validateLocation,
             message: '{VALUE} is not a valid longitude!'
         }
-    }
+    },
+	events: [mongoose.Schema.Types.EventID],
+	owner: mongoose.Schema.Types.UserID
 });
 
 const Location = mongoose.model('Location', LocationSchema);
