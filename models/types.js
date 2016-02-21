@@ -14,7 +14,7 @@ function LocationID(key, options) {
 LocationID.prototype = Object.create(mongoose.SchemaType.prototype);
 
 LocationID.prototype.cast = function(val) {
-    if (validateMongoDbID(val)) {
+    if (!validateMongoDbID(val)) {
         throw new mongoose.SchemaType.CastError('LocationID ', val + ' is not valid');
     }
     return val;
@@ -29,8 +29,8 @@ function EventID(key, options) {
 
 EventID.prototype = Object.create(mongoose.SchemaType.prototype);
 
-LocationID.prototype.cast = function(val) {
-    if (validateMongoDbID(val)) {
+EventID.prototype.cast = function(val) {
+    if (!validateMongoDbID(val)) {
         throw new mongoose.SchemaType.CastError('EventID ', val + ' is not valid');
     }
     return val;
@@ -45,8 +45,8 @@ function UserID(key, options) {
 
 UserID.prototype = Object.create(mongoose.SchemaType.prototype);
 
-LocationID.prototype.cast = function(val) {
-    if (validateMongoDbID(val)) {
+UserID.prototype.cast = function(val) {
+    if (!validateMongoDbID(val)) {
         throw new mongoose.SchemaType.CastError('UserID ', val + ' is not valid');
     }
     return val;
@@ -61,8 +61,8 @@ function DayID(key, options) {
 
 DayID.prototype = Object.create(mongoose.SchemaType.prototype);
 
-LocationID.prototype.cast = function(val) {
-    if (validateMongoDbID(val)) {
+DayID.prototype.cast = function(val) {
+    if (!validateMongoDbID(val)) {
         throw new mongoose.SchemaType.CastError('DayID ', val + ' is not valid');
     }
     return val;
@@ -78,9 +78,10 @@ function Time(key, options) {
 Time.prototype = Object.create(mongoose.SchemaType.prototype);
 
 Time.prototype.cast = function(val) {
-    const dur = val.duration !== 'undefined';
-    const start = val.start !== 'undefined';
-    const end = val.end !== 'undefined';
+    const dur = val.duration || null;
+    const start = val.start || null;
+    const end = val.end || null;
+
     const timeIsValid = function () {
         if(dur && !start && !end) {
             return true;
