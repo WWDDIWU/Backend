@@ -34,6 +34,10 @@ app.use(function(req, res, next) {
 	next();
 });
 
+app.options('*', function(req, res) {
+	res.sendStatus(200);
+});
+
 
 app.use('/api', api);
 
