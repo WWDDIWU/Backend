@@ -19,6 +19,13 @@ describe('Test the whole api', function() {
 
 	const owner = 'mrrobot';
 
+	let dayID;
+	let locationID;
+
+	// Remove everything from mrrobot
+	before(function() {
+	});
+
 	describe('Create user', function() {
 		it('create user account', function(done) {
 			const dev = {
@@ -55,14 +62,49 @@ describe('Test the whole api', function() {
 				owner: owner,
 				date: new Date(),
 			};
-			dayManager.newDay(day, owner, function(err, day) {
+			dayManager.newDay(day, owner, function(err, _day) {
+				dayID = _day.day.id;
+				done();
+			});
+		});
+	});
+
+	describe('Create location', function() {
+		it('create location', function(done) {
+			const responseObj = {
+				latitude: 11,
+				longitude: 49,
+				events: [],
+				owner: owner,
+				name: 'Mamas haus'
+			};
+			locationManager.newLocation(responseObj, owner, function(err, location) {
+				locationID = location.location.id;
 				done();
 			});
 		});
 	});
 
 	describe('Create event', function() {
+		it('create event', function(done) {
+			const event = {
+                priority: 1,
+                title: 'Kuchen backen',
+                description: 'Mit Mama Kuchen backen',
+                suggestion: false,
+                location: locationID,
+                day: dayID,
+                type: 1,
+                start: (new Date()).setHours(8),
+                end: (new Date()).setHours(12),
+                duration: null
+			};
 
+			eventManager.newEvent(event, owner, function(err, event) {
+				done();
+			});
+
+		});
 	});
 
 

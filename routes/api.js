@@ -28,7 +28,7 @@ api.post('/authenticate', function(req, res) {
                 if (utils.hashPassword(req.body.password, usr.salt) === usr.password) {
 
                     const token = jwt.sign({
-                        username: usr.username,
+                        username: usr._id,
                         email: usr.email
                     }, config.jwtSecret, {
                         expiresIn: 30 * 24 * 60 * 60 // expires in 30 days
