@@ -9,6 +9,7 @@ function validateLocation (location){
 }
 
 const LocationSchema = mongoose.Schema({
+    locationID: Number,
     name: String,
     latitude: {
         type: Number,

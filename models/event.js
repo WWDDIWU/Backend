@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const types = require('./types');
 
 const EventSchema = mongoose.Schema({
+    eventID: Number,
     type: {
        type: Number,
        validate: {

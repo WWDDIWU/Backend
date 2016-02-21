@@ -32,6 +32,15 @@ const UserSchema = mongoose.Schema({
         work: mongoose.Schema.Types.LocationID,
         other: [mongoose.Schema.Types.LocationID]
     },
+    unit: {
+        type: Number,
+        validate: {
+            validator: function (v) {
+                return (v < 2 && v >= 0);
+            },
+            message: '{VALUE} is not a valid unit type!'
+        }
+    }
     timeline: [mongoose.Schema.Types.DayID]
 });
 
