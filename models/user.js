@@ -7,7 +7,7 @@ const DayID = types.DayID;
 const Checksum = types.Checksum;
 
 const Device = mongoose.Schema({
-   lastUpdate: mongoose.Schema.Types.Checksum,
+   lastUpdate: Number,
    type: {
        type: Number,
        validate: {
@@ -40,7 +40,7 @@ const UserSchema = mongoose.Schema({
             },
             message: '{VALUE} is not a valid unit type!'
         }
-    }
+    },
     timeline: [mongoose.Schema.Types.DayID]
 });
 
