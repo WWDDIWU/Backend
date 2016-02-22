@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const types = require('./types');
 
 const LocationSchema = mongoose.Schema({
-    locationID: Number,
     name: String,
     latitude: Number,
     longitude: Number,

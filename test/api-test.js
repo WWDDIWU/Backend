@@ -88,13 +88,14 @@ describe('Test the whole api', function() {
 
 	describe('Create event', function() {
 		it('create event', function(done) {
+			this.timeout(5000);
 			const event = {
                 priority: 1,
                 title: 'Kuchen backen',
                 description: 'Mit Mama Kuchen backen',
                 suggestion: false,
                 location: locationID,
-                day: dayID,
+                day: null,
                 type: 1,
                 start: (new Date()).setHours(8),
                 end: (new Date()).setHours(12),
