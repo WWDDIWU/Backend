@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 
 const api = require('./routes/api');
 
-mongoose.connect('mongodb://169.53.137.142/wwddiwu');
+mongoose.connect('mongodb://localhost/wwddiwu');
 
 const app = express();
 
