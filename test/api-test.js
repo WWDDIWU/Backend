@@ -56,6 +56,7 @@ describe('Test the whole api', function() {
 		});
 	});
 
+
 	describe('Create day', function() {
 		it('create day model', function(done) {
 			const day = {

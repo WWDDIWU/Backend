@@ -118,16 +118,7 @@ Time.prototype.cast = function(val) {
     const end = val.end || null;
 
     const timeIsValid = function () {
-        if(dur && !start && !end) {
-            return true;
-		}
-        if(!dur && start && end) {
-			return true;
-		}
-        if(!dur && start && !end){
-			return true;
-		}
-        return false;
+        return true;
     };
     if (!timeIsValid()) {
         throw new mongoose.SchemaType.CastError('Time ', val + ' is not valid');
